@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "plugin": "com.plusls.carpet.PcaMixinPlugin",
   "mixins": [
+    "CustomPayloadC2SPacketAccessor",
     "MinecraftServerMixin",
     "PlayerManagerMixin",
     "ServerPlayNetworkHandlerMixin",

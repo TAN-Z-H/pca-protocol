@@ -25,11 +25,11 @@ public abstract class ServerPlayNetworkHandlerMixin
     @Inject(method = "onCustomPayload", at = @At("HEAD"))
     private void pcaProtocol(CustomPayloadC2SPacket packet, CallbackInfo ci)
     {
-        Identifier identifier = packet.getChannel();
+        Identifier identifier = ((CustomPayloadC2SPacketAccessor)packet).getChannel();
         MinecraftServer server = this.server;
         ServerPlayerEntity player = this.player;
         ServerPlayNetworkHandler handler = (ServerPlayNetworkHandler)(Object)this;
-        PacketByteBuf buf = packet.getData();
+        PacketByteBuf buf = ((CustomPayloadC2SPacketAccessor)packet).getData();
         PacketSender sender = new PacketSender();
 
         if (identifier.equals(PcaSyncProtocol.SYNC_BLOCK_ENTITY))
