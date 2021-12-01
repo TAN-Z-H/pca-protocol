@@ -1,26 +1,20 @@
 {
   "schemaVersion": 1,
-  "id": "pca",
+  "id": "pca-protocol",
   "version": "${version}",
-  "name": "Plusls carpet addition mod",
-  "description": "plusls carpet addition mod",
+  "name": "pca protocol",
+  "description": "Adds PCA protocol support to the server",
   "authors": [
     "plusls"
   ],
   "contact": {
-    "homepage": "https://blog.pluglg.com/",
-    "sources": "https://github.com/plusls/plusls-carpet-addition"
+    "homepage": "https://github.com/Fallen-Breath/pca-protocol",
+    "sources": "https://github.com/Fallen-Breath/pca-protocol"
   },
   "license": "CC0-1.0",
   "icon": "assets/pca/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "com.plusls.carpet.PcaMod"
-    ],
-    "client": [
-      "com.plusls.carpet.PcaMod"
-    ]
   },
   "mixins": [
     "pca.mixins.json"
@@ -28,13 +22,9 @@
   "accessWidener": "pca.accesswidener",
   "depends": {
     "fabricloader": ">=0.7.4",
-    "fabric": "*",
-    "minecraft": "1.18.x",
-    "carpet": ">=1.4.45+v210811"
+    "minecraft": "1.18.x"
   },
-  "custom": {
-    "modmenu": {
-      "parent": "carpet"
-    }
+  "breaks": {
+    "pca": "*"
   }
 }
