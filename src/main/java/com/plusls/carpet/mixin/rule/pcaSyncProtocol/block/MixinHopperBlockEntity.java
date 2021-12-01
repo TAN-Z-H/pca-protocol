@@ -1,6 +1,6 @@
 package com.plusls.carpet.mixin.rule.pcaSyncProtocol.block;
 
-import com.plusls.carpet.PcaMod;
+import com.plusls.carpet.ModInfo;
 import com.plusls.carpet.PcaSettings;
 import com.plusls.carpet.network.PcaSyncProtocol;
 import net.minecraft.block.entity.BlockEntityType;
@@ -17,11 +17,18 @@ public abstract class MixinHopperBlockEntity extends LootableContainerBlockEntit
         super(blockEntityType);
     }
 
+    @Inject(method = "insertAndExtract", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/entity/HopperBlockEntity;markDirty(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V"))
+    private static void onInsertAndExtract(World world, BlockPos pos, BlockState state, HopperBlockEntity blockEntity, BooleanSupplier booleanSupplier, CallbackInfoReturnable<Boolean> cir) {
+        if (PcaSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(blockEntity)) {
+            ModInfo.LOGGER.debug("update HopperBlockEntity: {}", pos);
+        }
+    }
+
     @Override
     public void markDirty() {
         super.markDirty();
         if (PcaSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this)) {
-            PcaMod.LOGGER.debug("update HopperBlockEntity: {}", this.pos);
+            ModInfo.LOGGER.debug("update HopperBlockEntity: {}", this.pos);
         }
     }
 }
