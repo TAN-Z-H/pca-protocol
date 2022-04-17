@@ -103,7 +103,7 @@ public class PcaSyncProtocol {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeIdentifier(world.getRegistryKey().getValue());
         buf.writeBlockPos(blockEntity.getPos());
-        buf.writeNbt(blockEntity.writeNbt(new NbtCompound()));
+        buf.writeNbt(blockEntity.createNbt());
         ServerPlayNetworking.send(player, UPDATE_BLOCK_ENTITY, buf);
     }
 
@@ -161,7 +161,7 @@ public class PcaSyncProtocol {
             return;
         }
         BlockPos pos = buf.readBlockPos();
-        ServerWorld world = player.getServerWorld();
+        ServerWorld world = player.getWorld();
         BlockState blockState = world.getBlockState(pos);
         clearPlayerWatchData(player);
         ModInfo.LOGGER.debug("{} watch blockpos {}: {}", player.getName().asString(), pos, blockState);
@@ -216,7 +216,7 @@ public class PcaSyncProtocol {
             return;
         }
         int entityId = buf.readInt();
-        ServerWorld world = player.getServerWorld();
+        ServerWorld world = player.getWorld();
         Entity entity = world.getEntityById(entityId);
         if (entity == null) {
             ModInfo.LOGGER.debug("Can't find entity {}.", entityId);
