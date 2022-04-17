@@ -175,11 +175,11 @@ public class PcaSyncProtocol {
                 // The method in World now checks that the caller is from the same thread...
                 blockEntityAdj = world.getWorldChunk(posAdj).getBlockEntity(posAdj);
             }
-        } else if (blockState.isOf(Blocks.BARREL) && CarpetHelper.getBoolRuleValue("largeBarrel")) {
+        } else if (blockState.getBlock() == Blocks.BARREL && CarpetHelper.getBoolRuleValue("largeBarrel")) {
             Direction directionOpposite = blockState.get(BarrelBlock.FACING).getOpposite();
             BlockPos posAdj = pos.offset(directionOpposite);
             BlockState blockStateAdj = world.getBlockState(posAdj);
-            if (blockStateAdj.isOf(Blocks.BARREL) && blockStateAdj.get(BarrelBlock.FACING) == directionOpposite) {
+            if (blockStateAdj.getBlock() == Blocks.BARREL && blockStateAdj.get(BarrelBlock.FACING) == directionOpposite) {
                 blockEntityAdj = world.getWorldChunk(posAdj).getBlockEntity(posAdj);
             }
         }
@@ -301,11 +301,11 @@ public class PcaSyncProtocol {
                     BlockPos posAdj = pos.offset(ChestBlock.getFacing(blockState));
                     playerListAdj = getWatchPlayerList(world, posAdj);
                 }
-            } else if (blockState.isOf(Blocks.BARREL) && CarpetHelper.getBoolRuleValue("largeBarrel")) {
+            } else if (blockState.getBlock() == Blocks.BARREL && CarpetHelper.getBoolRuleValue("largeBarrel")) {
                 Direction directionOpposite = blockState.get(BarrelBlock.FACING).getOpposite();
                 BlockPos posAdj = pos.offset(directionOpposite);
                 BlockState blockStateAdj = world.getBlockState(posAdj);
-                if (blockStateAdj.isOf(Blocks.BARREL) && blockStateAdj.get(BarrelBlock.FACING) == directionOpposite) {
+                if (blockStateAdj.getBlock() == Blocks.BARREL && blockStateAdj.get(BarrelBlock.FACING) == directionOpposite) {
                     playerListAdj = getWatchPlayerList(world, posAdj);
                 }
             }
